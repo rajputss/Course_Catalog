@@ -5,6 +5,10 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="passlib.hash.pbkdf2_sha256" />
+          <option value="urllib.urlencode" />
+          <option value="requests" />
+          <option value="werkzeug.secure_filename" />
+          <option value="course_catalog.xrange" />
         </list>
       </option>
     </inspection_tool>

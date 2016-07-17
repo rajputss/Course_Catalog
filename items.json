@@ -1,0 +1,16 @@
+{
+  "Schools": [
+    {
+      "name": "Georgia Institute of Technology",
+      "items": [
+        {
+          "course_name": "Introduction to Information Security",
+          "description": "Introduction to Information Security is a graduate-level introductory course in information security.",
+          "course_number": "CS-6035",
+          "department": "OMSCS",
+          "review": "TAs run amok, more time spent trying to trick students with wording than honest knowledge evaluation. Third project was basically use this really crappy app to gather research data for one of the TAs. Seriously, I'm paying to run around surveying people."
+        }
+      ]
+    }
+  ]
+}

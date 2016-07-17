@@ -4,7 +4,7 @@ from passlib.hash import pbkdf2_sha256
 
 import json
 
-from database_setup import Base, Catalog, CatalogItem, User, Admin
+from database_setup import Base, School, CatalogItem, User, Admin
 
 engine = create_engine('sqlite:///coursecatalog.db')
 
@@ -27,27 +27,27 @@ session.add(admin1)
 session.commit()
 
 # Reading JSON file and populate the database with course categories and items
-itemsFile = open('catalog_items.json')
+itemsFile = open('items.json')
 
 data = json.load(itemsFile)
 
 # To determine number of catalog courses
-cnum = len(data['Catalogs'])
+cnum = len(data['Schools'])
 for c in range(0, cnum):
-    print(data['Catalogs'][c]['name'])
+    print(data['Schools'][c]['name'])
 
-    catalog1 = Catalog(name=data['Catalogs'][c]['name'])
-    session.add(catalog1)
+    school1 = School(name=data['Schools'][c]['name'])
+    session.add(school1)
     session.commit()
 
-    inum = len(data['Catalogs'][c]['items'])
+    inum = len(data['Schools'][c]['items'])
     for i in range(0, inum):
-        item = CatalogItem(name=data['Catalogs'][c]['items'][i]['name'],
-                           description=data['Catalogs'][c]['items'][i]['description'],
-                           course_number=data['Catalogs'][c]['items'][i]['course_number'],
-                           department=data['Catalogs'][c]['items'][i]['department'],
-                           reviews=data['Catalogs'][c]['items'][i]['reviews'],
-                           catalog=catalog1)
+        item = CatalogItem(course_name=data['Schools'][c]['items'][i]['course_name'],
+                           description=data['Schools'][c]['items'][i]['description'],
+                           course_number=data['Schools'][c]['items'][i]['course_number'],
+                           department=data['Schools'][c]['items'][i]['department'],
+                           reviews=data['Schools'][c]['items'][i]['review'],
+                           catalog=school1)
         session.add(item)
         session.commit()
 

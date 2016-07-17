@@ -74,7 +74,7 @@ class CatalogItem(Base):
             'description'	: self.description,
             'course_number'	: self.course_number,
             'department'	: self.department,
-            'reviews'	    : self.reviews,
+            'review'	    : self.review,
             'catalog_id'	:self.catalog_id,
         }
 
