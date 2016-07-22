@@ -386,7 +386,6 @@ def gconnect():
     if login_session['username'] == '':
         login_session['username'] = 'Anonymous'
     login_session['email'] = data['email'] # to get the email from google, make sure login page has data-scope="openid email"
-    login_session['picture'] = data['picture']
     # see if the user exists in the database; if not create a new user
     user_id = dbops.get_user_id(login_session['email'])
     if user_id is None:
@@ -477,7 +476,6 @@ def ghconnect():
     if login_session['username'] == '':
         login_session['username'] = 'Anonymous'
     login_session['email'] = profile['email']
-    login_session['picture'] = profile['avatar_url']
     login_session['github_id'] = profile['id']
     login_session['isadmin'] = False
 
@@ -537,12 +535,20 @@ def disconnect():
         del login_session['provider']
         del login_session['username']
         del login_session['email']
-        del login_session['picture']
         del login_session['isadmin']
         del login_session['user_id']
 
         # Redirect user to home page and give message they have been logged out.
         flash("You have been successfully logged out")
-        return redirect(url_for('sports'))
+        return redirect(url_for('schools'))
     else:
-        return redirect(url_for('sports'))
+        return redirect(url_for('schools'))
+
+
+# Homepage showing the list of schools and a list of the nine most recent items added route
+@app.route("/")
+def schools():
+    """Route to display the homepage showing all of schools and most recent items."""
+    schools = dbops.get_schools()
+    recent_items = dbops.get_recent_items()
+    return render_template('home.html', schools=schools, recent_items=recent_items)

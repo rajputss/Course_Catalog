@@ -1,0 +1,14 @@
+<div id="header">
+	<div id="container">
+		<div id="login">
+            {% if 'username' not in session %}
+            <a STYLE="position:absolute; TOP:108px; RIGHT:14px;"class="loginBtn" href="{{url_for('show_login')}}">Login</a>
+			{% else %}
+				<a STYLE="position:absolute; TOP:90px; RIGHT:4px;"class="loginBtn" href="{{url_for('disconnect')}}">Logout</a>
+				<p><a STYLE="position:absolute; TOP:123px; RIGHT:1px;"href="{{url_for('user_profile')}}">{{session['username']}}</a></p>
+			{% endif %}
+		</div>
+		<div id="logo"><a href="/"><img STYLE="position:absolute; TOP:11px; LEFT:-5px;" src="{{ url_for('static', filename='LogoFactory.jpg')}}" width="175" height="149" alt="Got Sports" /></a></div>
+		<!--<div style="margin-top: 9px;"><img src="{{ url_for('static', filename='LogoFactory.jpg') }}" width="151" height="100" alt="Got Sports" /></a>-->
+	</div>
+</div>
