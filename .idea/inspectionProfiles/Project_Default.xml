@@ -17,6 +17,7 @@
           <option value="werkzeug.secure_filename" />
           <option value="course_catalog.xrange" />
           <option value="course_catalog.GH_CLIENT_SECRET" />
+          <option value="dboperations.catalog_id" />
         </list>
       </option>
     </inspection_tool>
