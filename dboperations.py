@@ -28,7 +28,7 @@ def get_schools():
 # Get a list of the 10 most recent items added.
 def get_recent_items():
     """Returns a result set of the ten most recent items added to the database."""
-    return session.query(CatalogItem).join(School).filter('school.id==catalog_item.school_id').order_by\
+    return session.query(CatalogItem).join(School).filter('school.id==catalog_item.catalog_id').order_by\
         ('catalog_item.id desc').limit(10).all()
 
 
