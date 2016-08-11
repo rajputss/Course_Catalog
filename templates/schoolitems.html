@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="main">
+        <div id="content">
+            <div style="float: left; text-indent: -111px; padding; bottom: -27px; font-size: 15pt;">&#171; <a href="/">Home</a></div>
+        </div>
+        <div id="categories">
+            <ul>
+                {% for c in categories %}
+                    <li width="300px"><a href="{{url_for('schools',catalog_id=c.id)}}">{{ c.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div id="items">
+            {% if 'username' in session %}
+            <div><a id="myitems" href="{{url_for('my_items')}}">My items</a></div>
+            {% endif %}
+
+            <h2 style="text-indent: -11px">{{ school.name }} items ({{count}})</h2>
+                {% if 'username' in session %}
+                    <div><a id="additem" href="{{url_for('new_item',catalog_id=school.id)}}">Add item</a></div>
+                {% endif %}
+            <ul>
+                {% for i in items %}
+                    <li><a href="{{url_for('item_info',catalog_id=i.catalog_id, item_id=i.id)}}">{{ i.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    <div class="clearfix"></div>
+    </div>
+{% include "footer.html" %}
+{% include "messages.html" %}
+</body>
+</html>

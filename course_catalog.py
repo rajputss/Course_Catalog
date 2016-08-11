@@ -561,6 +561,39 @@ def schools():
     return render_template('home.html', schools=schools, recent_items=recent_items)
 
 
+# Route that will list the items in a single school category
+@app.route('/school/<int:catalog_id>/')
+def school_items(catalog_id):
+    """Route to display the items for a given school."""
+    schools = dbops.get_schools()
+    school = dbops.get_school(catalog_id)
+    if school is None:
+        return invalid_school()
+    items = dbops.get_school_courses(catalog_id)
+    count = len(items)
+
+    return render_template('schoolitems.html', schools=schools, school=school, items=items, count=count)
+
+
+# Item information route
+@app.route('/school/<int:catalog_id>/item/<int:item_id>/')
+def item_info(catalog_id, item_id):
+    """Route to display item information for a given item."""
+    # Grab the current school and item info
+    school = dbops.get_school(catalog_id)
+    if school is None:
+        return invalid_school()
+        item = dbops.get_courses_info(item_id)
+        if item is None:
+            return invalid_item()
+        # If the user is logged in, pass user id to page; otherwise, pass a bogus value for the user id.
+        #  This will let us determine whether to show the Edit/Delete links to the user.
+        if 'username' in login_session:
+            return render_template('iteminfo.html', school=school, item=item, user_id=login_session['user_id'], owner=item.user_id)
+        else:
+            return render_template('iteminfo.html', school=school, item=item, user_id='-------', owner=item.user_id)
+
+
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
     app.debug = True

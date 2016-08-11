@@ -33,18 +33,18 @@ def get_recent_items():
 
 
 # Get a school.
-def get_school(school_id):
+def get_school(catalog_id):
     """Returns a result set for a given school ID."""
     try:
-        return session.query(School).filter_by(id = school_id).one()
+        return session.query(School).filter_by(id=catalog_id).one()
     except NoResultFound as e:
         return None
 
 
 # Get the info for all courses for a given school
-def get_school_courses(school_id):
+def get_school_courses(catalog_id):
     """Returns a result set of all the courses for a given school"""
-    return session.query(CatalogItem).filter_by(school_id=school_id).order_by('catalog_item.name').all()
+    return session.query(CatalogItem).filter_by(catalog_id=catalog_id).order_by('catalog_item.course_name').all()
 
 
 # Get the info about an item
